@@ -2,29 +2,41 @@
   box-sizing: border-box;
   display: block;
   height: auto;
-  overflow: visible;
+  min-height: 100vh;
+  overflow: hidden;
   padding: 10vh 10vw;
   position: relative;
   width: 100vw; }
   .panel .column, .panel .alley {
     display: block;
-    position: absolute; }
-  .panel .background, .panel .breakout {
+    float: left;
+    min-height: 1vh;
+    position: relative; }
+  .panel .clear {
+    clear: both; }
+  .panel .background {
     height: 100%;
     left: 0;
     overflow: hidden;
     position: absolute;
     top: 0;
     width: 100%; }
+  .panel .bleed-wrapper {
+    overflow: hidden; }
   .panel img {
-    height: 100%;
-    transform: translate(0%, 0%); }
+    width: 100%; }
   .panel .image {
     background-repeat: no-repeat;
     background-size: 100%;
     display: block;
     position: relative;
     height: 100%; }
+
+#gagarin {
+  transform: translate(-20%, 0); }
+
+#kennedy {
+  transform: translate(-30%, 0); }
 
 body {
   background-color: #212121;
@@ -38,11 +50,7 @@ body {
     color: #212121; }
 
 .panel {
-  background-color: #fafafa;
-  font-size: 14px;
-  letter-spacing: -0.5px;
-  line-height: 22px;
-  text-align: justify; }
+  background-color: #fafafa; }
 
 .black {
   background-color: black;
@@ -54,6 +62,15 @@ body {
   .dark a, .dark a:visited {
     color: #fafafa; }
 
+.red {
+  color: #f00000; }
+
+.white {
+  color: #fafafa; }
+
+.blue {
+  color: #2828dd; }
+
 .opening-title {
   color: #fafafa;
   display: block;
@@ -64,20 +81,20 @@ body {
   text-align: center;
   width: 100%; }
 
-.moon-illustration {
+.moon-illustration, .moon-illustration-red, .moon-illustration-blue {
   background-image: url("../images/moon.jpg");
   background-position: 50% 57%;
   background-repeat: no-repeat;
   background-size: 121%;
   border-radius: 50%;
+  bottom: -70vh;
   display: block;
   height: 100vh;
   left: 50%;
   position: absolute;
-  top: 70vh;
-  transform: translate(-50%, -100%) rotate(180deg);
+  transform: translate(-50%, 0%) rotate(180deg);
   width: 100vh; }
-  .moon-illustration .moon-overlay {
+  .moon-illustration .moon-overlay, .moon-illustration-red .moon-overlay, .moon-illustration-blue .moon-overlay {
     background-color: #2828dd;
     border-radius: 50%;
     display: block;
@@ -88,9 +105,38 @@ body {
     top: 0;
     width: 100%; }
 
-.von-braun-image {
-  background-image: url(../images/Wernher_von_Braun.jpg);
-  background-position: top; }
+.moon-illustration-red {
+  left: 45%; }
+
+.moon-illustration-blue {
+  left: 55%; }
+
+.headline {
+  color: #2828dd;
+  font-size: 5vw;
+  line-height: 5vw;
+  text-align: left;
+  width: 100%; }
+
+.caption {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  letter-spacing: px;
+  line-height: 22px;
+  text-align: left; }
+
+.caption-right {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  letter-spacing: px;
+  line-height: 22px;
+  text-align: right; }
+
+.body-text {
+  font-size: 13px;
+  letter-spacing: -0.5px;
+  line-height: 22px;
+  text-align: justify; }
 
 .imperfectionize:hover {
   cursor: pointer; }

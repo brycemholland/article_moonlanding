@@ -4,17 +4,24 @@
   box-sizing: border-box;
   display: block;
   height: auto;
-  overflow: visible;
+  min-height: 100vh;
+  overflow: hidden;
   padding: 10vh 10vw;
   position: relative;
   width: 100vw;
 
   .column, .alley{
     display: block;
-    position: absolute;
+    float: left;
+    min-height: 1vh;
+    position: relative;
   }
 
-  .background, .breakout{
+  .clear{
+    clear: both;
+  }
+
+  .background{
     height: 100%;
     left: 0;
     overflow: hidden;
@@ -23,10 +30,12 @@
     width: 100%;
   }
 
+  .bleed-wrapper{
+    overflow: hidden;
+  }
+
   img{
-    height: 100%;
-    transform: translate(0%, 0%);
-    //max-width: 100%;
+    width: 100%;
   }
   .image{
     background-repeat: no-repeat;
@@ -47,6 +56,17 @@ $white: #fafafa;
 $red: #F00000;
 $blue: #2828DD;
 
+#von_braun{
+
+}
+
+#gagarin{
+  transform: translate(-20%, 0);
+}
+
+#kennedy{
+  transform: translate(-30%, 0);
+}
 
 body{
   background-color: #212121;
@@ -63,10 +83,6 @@ body{
 
 .panel{
   background-color: #fafafa;
-  font-size: 14px;
-  letter-spacing: -0.5px;
-  line-height: 22px;
-  text-align: justify;
 }
 
 .black{
@@ -82,30 +98,41 @@ body{
   }
 }
 
+.red{
+  color: $red;
+}
+
+.white{
+  color: $white;
+}
+
+.blue{
+  color: $blue;
+}
+
 .opening-title{
   color: $white;
   display: block;
   font-size: 17vh;
   letter-spacing: auto;
   line-height: normal;
-  //padding-left: 10vw;
   position: relative;
   text-align: center;
   width: 100%;
 }
 
-.moon-illustration{
+.moon-illustration, .moon-illustration-red, .moon-illustration-blue{
   background-image: url("../images/moon.jpg");
   background-position: 50% 57%;
   background-repeat: no-repeat;
   background-size: 121%;
   border-radius: 50%;
+  bottom: -70vh;
   display: block;
   height: 100vh;
   left: 50%;
   position: absolute;
-  top: 70vh;
-  transform: translate(-50%, -100%) rotate(180deg);
+  transform: translate(-50%, 0%) rotate(180deg);
   width: 100vh;
   .moon-overlay{
     background-color: $blue;
@@ -120,10 +147,44 @@ body{
   }
 }
 
-.von-braun-image{
-  background-image: url(../images/Wernher_von_Braun.jpg);
-  //background-image: url(../images/Von_Braun_engines.jpg);
-  background-position: top;
+.moon-illustration-red{
+  left: 45%
+}
+
+.moon-illustration-blue{
+  left: 55%
+}
+
+.headline{
+  color: $blue;
+  font-size: 5vw;
+  line-height: 5vw;
+  text-align: left;
+  width: 100%;
+  //text-transform: uppercase;
+}
+
+.caption{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  letter-spacing: px;
+  line-height: 22px;
+  text-align: left;
+}
+
+.caption-right{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  letter-spacing: px;
+  line-height: 22px;
+  text-align: right;
+}
+
+.body-text{
+  font-size: 13px;
+  letter-spacing: -0.5px;
+  line-height: 22px;
+  text-align: justify;
 }
 
 .imperfectionize:hover{

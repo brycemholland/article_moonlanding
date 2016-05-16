@@ -9,6 +9,7 @@ $(document).ready(function(){
     panel_content_array.push($(this).html());
   });
 
+
   adjustColumns();
 
   $(window).resize(function(){
@@ -21,6 +22,7 @@ $(document).ready(function(){
     var window_height = $(window).height();
     var window_width = $(window).width();
     var left_margin = parseInt($panel.css("padding-left"));
+    var top_margin = parseInt($panel.css("padding-top"));
     var h_margin = parseInt($panel.css("padding-left"))+parseInt($panel.css("padding-right"));
     var v_margin = parseInt($panel.css("padding-top"))+parseInt($panel.css("padding-bottom"));
     var active_width = window_width-h_margin;
@@ -29,119 +31,235 @@ $(document).ready(function(){
     var column_width = (active_width/column_count)*0.96;
     var column_total_width = column_width*column_count;
     var alley_count = column_count-1;
-    var alley_width = (active_width-column_total_width)/alley_count;
+    var alley_width = ((active_width-column_total_width)/alley_count);
 
     if (column_count < 1){
       column_count = 1;
     }
 
-    // Create columns
-    for (var i=0; i<column_count; i++){
-      $panel.each(function(){
-        $(this).append('<div class="column"></div>');
-      });
-    }
+    // Create columns and fill with content ============================
 
-    // Distribute content
-    $panel.each(function(i){
-      var column_content_array = panel_content_array[i].split("<!--col-breakpoint-->");
-      if (!$(this).hasClass('push-right')){
-        if (column_count == 1){
-          for (var j=0; j<column_content_array.length; j++){
-            $(this).find('.column').append(column_content_array[j]);
-          }
-        } else if (column_count >= column_content_array.length){
-          for (var j=0; j<column_content_array.length; j++){
-            $(this).find('.column:eq('+j+')').html(column_content_array[j]);
-          }
+    $panel.each(function(h){
+      for (var i=0; i<column_count; i++){
+        if (i == 0){
+          $(this).append('<div class="column" data-index="'+i+'"></div>');
         } else {
-          var base_content_per_column = Math.floor(column_content_array.length/column_count);
-          var leftover_content_per_column = column_content_array.length%column_count;
-          for (var j=0; j<leftover_content_per_column; j++){
-            for (var k=(base_content_per_column+1)*j; k<((base_content_per_column+1)*j)+(base_content_per_column+1); k++){
-              $(this).find('.column:eq('+j+')').append(column_content_array[k]);
-            }
-          }
-          for (var j=leftover_content_per_column; j<column_count; j++){
-            for (var k=(base_content_per_column+1)*leftover_content_per_column; k<((base_content_per_column+1)*j)+(base_content_per_column); k++){
-              $(this).find('.column:eq('+j+')').append(column_content_array[k]);
-            }
-          }
-        }
-      } else {
-        if (column_count == 1){
-          for (var j=0; j<column_content_array.length; j++){
-            $(this).find('.column').append(column_content_array[j]);
-          }
-        } else if (column_count >= column_content_array.length){
-          column_content_array.reverse();
-          for (var j=0; j<column_content_array.length; j++){
-            $(this).find('.column:eq('+(column_count-1-j)+')').html(column_content_array[j]);
-          }
-        } else {
-          column_content_array.reverse();
-          var base_content_per_column = Math.floor(column_content_array.length/column_count);
-          var leftover_content_per_column = column_content_array.length%column_count;
-          for (var j=0; j<leftover_content_per_column; j++){
-            for (var k=(base_content_per_column+1)*j; k<((base_content_per_column+1)*j)+(base_content_per_column+1); k++){
-              $(this).find('.column:eq('+(column_count-1-j)+')').prepend(column_content_array[k]);
-            }
-          }
-          for (var j=leftover_content_per_column; j<column_count; j++){
-            for (var k=(base_content_per_column+1)*leftover_content_per_column; k<((base_content_per_column+1)*j)+(base_content_per_column); k++){
-              $(this).find('.column:eq('+(column_count-1-j)+')').prepend(column_content_array[k]);
-            }
-          }
+          $(this).append('<div class="alley"></div><div class="column" data-index="'+i+'"></div>');
         }
       }
+      $(this).append('<div class="clear"></div>');
+    });
+
+
+    // Set column width =======================================
+
+    if (column_count == 1){ 
+      $('.column').width(active_width);
+    } else {
+      $('.column').width(column_width-1);
+      $('.alley').width(alley_width-1);
+    }
+
+
+    // Distribute content ===========================================
+    
+    $panel.each(function(i){
+      var column_content_array = panel_content_array[i].split("<!--breakpoint 1/"+column_count+"-->");
+      for (var j=0; j<column_count; j++){ 
+        if (column_content_array.length == 1){
+          column_content_array = panel_content_array[i].split("<!--breakpoint 1/"+(column_count-j)+"-->");
+        } else {
+          break;
+        }
+      }
+      if (column_count == 1){
+        for (var j=0; j<column_content_array.length; j++){
+          $(this).find('.column').append(column_content_array[j]);
+        }
+      } else {
+        if (!$(this).hasClass("push-right")){
+          if (column_count >= column_content_array.length){
+            for (var j=0; j<column_content_array.length; j++){
+              $(this).find('.column:eq('+j+')').html(column_content_array[j]);
+            }
+          } else {
+            var base_content_per_column = Math.floor(column_content_array.length/column_count);
+            var leftover_content_per_column = column_content_array.length%column_count;
+            var content_counter = 0;
+            while (content_counter < column_content_array.length){
+              for (var j=0; j<leftover_content_per_column; j++){
+                for (var k=0; k<base_content_per_column+1; k++){ 
+                  $(this).find('.column:eq('+j+')').append(column_content_array[content_counter]);
+                  content_counter++;
+                }
+              }
+              for (var j=leftover_content_per_column; j<column_count; j++){
+                for (var k=0; k<base_content_per_column; k++){ 
+                  $(this).find('.column:eq('+j+')').append(column_content_array[content_counter]);
+                  content_counter++;
+                }
+              }
+            }
+          }
+        } else {
+          column_content_array.reverse();
+          if (column_count >= column_content_array.length){
+            for (var j=0; j<column_content_array.length; j++){
+              $(this).find('.column:eq('+(column_count-1-j)+')').html(column_content_array[j]);
+            }
+          } else {
+            var base_content_per_column = Math.floor(column_content_array.length/column_count);
+            var leftover_content_per_column = column_content_array.length%column_count;
+            var content_counter = 0;
+            while (content_counter < column_content_array.length){
+              for (var j=0; j<leftover_content_per_column; j++){
+                for (var k=0; k<base_content_per_column+1; k++){ 
+                  $(this).find('.column:eq('+j+')').append(column_content_array[content_counter]);
+                  content_counter++;
+                }
+              }
+              for (var j=leftover_content_per_column; j<column_count; j++){
+                for (var k=0; k<base_content_per_column; k++){ 
+                  $(this).find('.column:eq('+j+')').append(column_content_array[content_counter]);
+                  content_counter++;
+                }
+              }
+            }
+          }
+        }
+      } 
       $(this).find($(".background")).prependTo($(this));
     });
 
+    // Span Columns ===================================================
 
-    // Resize columns and panels
-    if (column_width < active_width){ 
-      $('.column').width(column_width);
-    } else {
-      $('.column').width(active_width);
-    }
+    $span_half = $('.span-half');
+    column_count_half = Math.ceil(column_count/2);
+    $span_half.each(function(){
+      $(this).width((column_width*column_count_half)+(alley_width*(column_count_half-1)));
+    });
+    
 
-    $panel.each(function(){
-      $(this).height(active_height);
-      for (var i=0; i<column_count; i++){
-        var $this_column = $(this).find('.column:eq('+i+')');
-        if ($this_column.height() > active_height){
-          $(this).height($this_column.height());
-        } else {
-          $this_column.height(active_height);
+    // Text-span ======================================================
+
+    var $text_span = $(".text-span");
+    $text_span.each(function(){
+      var this_width = $(this).width();
+      var this_line_array = $(this).html().split("<br>");
+      for (var i=0; i<this_line_array.length; i++){ 
+        this_line_array[i] = this_line_array[i].split("");
+      }
+      var longest_line_index;
+      console.log(this_line_array);
+      for (var i=0; i<this_line_array.length-1; i++){
+        for (var j=i+1; j<this_line_array.length; j++){
+          if (this_line_array[i].length >= this_line_array[j].length){
+            longest_line_index = i;
+          } else {
+            longest_line_index = j;
+            break;
+          }
         }
-        $(this).find(".column:eq("+i+")").css("left",((column_width*i)+(alley_width*i)+left_margin)+"px");
+      }
+      console.log(longest_line_index);
+      console.log(this_line_array[longest_line_index]);
+      var text_vw = ((this_width/(window_width/100))/this_line_array[longest_line_index].length)*1.75;
+      var $this_column = $(this).parent(".column");
+      var this_column_index = $this_column.data('index');
+      var $this_panel = $this_column.parent(".panel");
+      $(this).css({
+        "font-size": text_vw+"vw",
+        "line-height": text_vw+"vw"
+      });
+      var this_height = $(this).height();
+      if ($(this).hasClass('span-half')){
+        column_count_half = Math.ceil(column_count/2);
+        for (var i=1; i<column_count_half; i++){ 
+          $this_panel.find($('.column[data-index='+(this_column_index+i)+']')).css('padding-top', this_height+'px');
+        }
       }
     });
 
-    var $breakout = $(".breakout");
-    $breakout.each(function(){
-      if (column_count > 1){
-        var this_left = parseInt($(this).parent().css("left"));
-        $(this).css({
-          "max-height": $(this).parent().css("height"),
-          "min-height": window_width-this_left-h_margin/2+"px",
-          "width": window_width-this_left-h_margin/2+"px"
-        });
-      } else {
-        var $this_column = $(this).parent(".column");
-        var $this_panel = $this_column.parent(".panel");
 
-        $this_column.height($this_column.height()+$(this).height());
-        $this_panel.height($this_column.height());
-        $(this).css({
-          "left": -left_margin+"px",
-          "position": "relative",
-          "top": left_margin,
-          "width": window_width+"px"
-        });
-        //$(this).removeClass('breakout');
-      }
-    });
+    // Set Image Bleed =================================================
+
+    var $bleed = $("img.bleed");
+    if (column_count > 1){
+
+      $bleed.wrap("<div class='bleed-wrapper'></div>");
+      var $bleed_wrapper = $(".bleed-wrapper");
+      $bleed_wrapper.each(function(){
+        var $this_wrapper = $(this);
+        var $this_column = $this_wrapper.parent()
+        var $this_panel = $this_column.parent()
+        var this_column_index = $this_panel.find(".column").index($this_column);
+        var $this_img = $(this).find("img.bleed");
+
+        if ($this_img.hasClass('bleed-left')) {
+          // Bleed left
+          var this_left = left_margin+(column_width*this_column_index)+(alley_width*this_column_index);
+          $this_wrapper.css({
+            "height": active_height+"px",
+            "transform": "translate("+(-this_left)+"px ,0)",
+            "width": this_left+column_width+1+"px"
+          });
+        } else if ($this_img.hasClass('bleed-right')){
+          // Bleed right
+          var this_left = left_margin+(column_width*this_column_index)+(alley_width*this_column_index);
+          $this_wrapper.css({
+            "height": active_height+"px",
+            "width": window_width-this_left+this_column_index*2+"px"
+          });
+        } else if ($this_img.hasClass('bleed-full-left')){
+          // Bleed full left
+          var this_left = left_margin+(column_width*this_column_index)+(alley_width*this_column_index);
+          $this_wrapper.css({
+            "height": $this_panel.height()+v_margin+2+"px",
+            "position": "absolute",
+            "transform": "translate("+(-this_left-1)+"px ,"+(-top_margin-1)+"px)",
+            "width": this_left+column_width+1+"px"
+          });
+        } else if ($this_img.hasClass('bleed-full-right')){
+          // Bleed full right
+          var this_left = left_margin+(column_width*this_column_index)+(alley_width*this_column_index);
+          $this_wrapper.css({
+            "height": $this_panel.height()+v_margin+2+"px",
+            "position": "absolute",
+            "transform": "translate(0,"+(-top_margin)+"px)",
+            "width": window_width-this_left+this_column_index*2+"px"
+          });
+        } else if ($this_img.hasClass('bleed-vertical')) {
+          // Bleed vertical
+          $this_wrapper.css({
+            "height": $this_panel.height()+v_margin+2+"px",
+            "position": "absolute",
+            "transform": "translate(0,"+(-top_margin-1)+"px)",
+            "width": column_width+"px"
+          });
+        }
+
+        // set image size in wrapper
+        var this_wrapper_ratio = $this_wrapper.width()/$this_wrapper.height();
+        var this_img_ratio = $this_img.width()/$this_img.height();
+        if (this_img_ratio > this_wrapper_ratio){
+          $this_img.css({
+            "height": "100%",
+            "width": "auto"
+          });
+        } else {
+          $this_img.css({
+            "height": "auto",
+            "width": "100%"
+          });
+        }
+      });
+
+    } else {
+      $bleed.css({
+        "transform": "translate("+(-left_margin-1)+"px, 0)",
+        "width": window_width+1+"px"
+      });
+    }
 
   }
 
