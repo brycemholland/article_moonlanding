@@ -12,12 +12,12 @@
 
 // SETTINGS ==================================
 
-var max_rotation       = 14;    // 0 is none, 60 is a lot
-var vertical_spacing   = 1.5;  // 0 is none, 1.5 is a lot
-var horizontal_spacing = 0.5;  // 0 is none, 0.5 is a lot
+var max_rotation       = 24;    // 0 is none, 60 is a lot
+var vertical_spacing   = .5;  // 0 is none, 1.5 is a lot
+var horizontal_spacing = 2.5;  // 0 is none, 0.5 is a lot
 var drift              = true; // A value of true causes the text to drift
-var auto_correct       = true; // A value of true causes the text to become unaltered automatically
-var hover_correct      = false; // A value of true causes the text to become unaltered whlie hovering with the mouse
+var auto_correct       = false; // A value of true causes the text to become unaltered automatically
+var hover_correct      = true; // A value of true causes the text to become unaltered whlie hovering with the mouse
 
 
 // CODE ======================================

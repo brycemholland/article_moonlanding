@@ -52,20 +52,17 @@
 
 $black: #212121;
 $true_black: #000000;
-$white: #fafafa;
+$white: #F5F5F5;
 $red: #F00000;
 $blue: #2828DD;
-
-#von_braun{
-
-}
+$yellow: #FBC02D;
 
 #gagarin{
-  transform: translate(-20%, 0);
+  //transform: translate(-20%, 0);
 }
 
 #kennedy{
-  transform: translate(-30%, 0);
+  //transform: translate(-30%, 0);
 }
 
 body{
@@ -81,13 +78,18 @@ body{
   }
 }
 
+iframe{
+  min-height: 80vh;
+  width: 100%;
+}
+
 .panel{
-  background-color: #fafafa;
+  background-color: $white;
 }
 
 .black{
   background-color: $true_black;
-  color: #fafafa;
+  color: $white;
 }
 
 .dark{
@@ -96,18 +98,6 @@ body{
   a, a:visited{
     color: #fafafa;
   }
-}
-
-.red{
-  color: $red;
-}
-
-.white{
-  color: $white;
-}
-
-.blue{
-  color: $blue;
 }
 
 .opening-title{
@@ -122,17 +112,17 @@ body{
 }
 
 .moon-illustration, .moon-illustration-red, .moon-illustration-blue{
-  background-image: url("../images/moon.jpg");
+  background-image: url("../images/moon2.png");
   background-position: 50% 57%;
   background-repeat: no-repeat;
-  background-size: 121%;
-  border-radius: 50%;
+  background-size: 100%;
+  //border-radius: 50%;
   bottom: -70vh;
   display: block;
   height: 100vh;
   left: 50%;
   position: absolute;
-  transform: translate(-50%, 0%) rotate(180deg);
+  transform: translate(-50%, 0%);// rotate(180deg);
   width: 100vh;
   .moon-overlay{
     background-color: $blue;
@@ -156,27 +146,39 @@ body{
 }
 
 .headline{
-  color: $blue;
+  //background-color: $yellow;
+  color: $yellow;
   font-size: 5vw;
   line-height: 5vw;
-  text-align: left;
+  //padding: 0 0 1vh 1vw;
+  text-align: right;
+  transform: rotate(-1deg);
   width: 100%;
-  //text-transform: uppercase;
 }
 
-.caption{
+.subhead{
+  background-color: $yellow;
+  color: $white;
+  padding: 2px;
+  text-align: left;
+  transform: rotate(1deg);
+}
+
+.caption, .caption-right, .caption-vertical{
+  color: $yellow;
   font-family: 'Montserrat', sans-serif;
   font-size: 12px;
   letter-spacing: px;
-  line-height: 22px;
   text-align: left;
+}
+
+.caption-vertical{
+  position: relative;
+  //transform: rotate(90deg);
+  white-space: nowrap;
 }
 
 .caption-right{
-  font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
-  letter-spacing: px;
-  line-height: 22px;
   text-align: right;
 }
 
@@ -185,6 +187,13 @@ body{
   letter-spacing: -0.5px;
   line-height: 22px;
   text-align: justify;
+}
+
+.credit{
+  font-size: 13px;
+  letter-spacing: -0.5px;
+  line-height: 22px;
+  text-align: left;
 }
 
 .imperfectionize:hover{

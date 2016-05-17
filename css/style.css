@@ -32,12 +32,6 @@
     position: relative;
     height: 100%; }
 
-#gagarin {
-  transform: translate(-20%, 0); }
-
-#kennedy {
-  transform: translate(-30%, 0); }
-
 body {
   background-color: #212121;
   color: #212121;
@@ -49,12 +43,16 @@ body {
   body a, body a:visited {
     color: #212121; }
 
+iframe {
+  min-height: 80vh;
+  width: 100%; }
+
 .panel {
-  background-color: #fafafa; }
+  background-color: whitesmoke; }
 
 .black {
   background-color: black;
-  color: #fafafa; }
+  color: whitesmoke; }
 
 .dark {
   background-color: #212121;
@@ -62,17 +60,8 @@ body {
   .dark a, .dark a:visited {
     color: #fafafa; }
 
-.red {
-  color: #f00000; }
-
-.white {
-  color: #fafafa; }
-
-.blue {
-  color: #2828dd; }
-
 .opening-title {
-  color: #fafafa;
+  color: whitesmoke;
   display: block;
   font-size: 17vh;
   letter-spacing: auto;
@@ -82,17 +71,16 @@ body {
   width: 100%; }
 
 .moon-illustration, .moon-illustration-red, .moon-illustration-blue {
-  background-image: url("../images/moon.jpg");
+  background-image: url("../images/moon2.png");
   background-position: 50% 57%;
   background-repeat: no-repeat;
-  background-size: 121%;
-  border-radius: 50%;
+  background-size: 100%;
   bottom: -70vh;
   display: block;
   height: 100vh;
   left: 50%;
   position: absolute;
-  transform: translate(-50%, 0%) rotate(180deg);
+  transform: translate(-50%, 0%);
   width: 100vh; }
   .moon-illustration .moon-overlay, .moon-illustration-red .moon-overlay, .moon-illustration-blue .moon-overlay {
     background-color: #2828dd;
@@ -112,24 +100,32 @@ body {
   left: 55%; }
 
 .headline {
-  color: #2828dd;
+  color: #fbc02d;
   font-size: 5vw;
   line-height: 5vw;
-  text-align: left;
+  text-align: right;
+  transform: rotate(-1deg);
   width: 100%; }
 
-.caption {
+.subhead {
+  background-color: #fbc02d;
+  color: whitesmoke;
+  padding: 2px;
+  text-align: left;
+  transform: rotate(1deg); }
+
+.caption, .caption-right, .caption-vertical {
+  color: #fbc02d;
   font-family: 'Montserrat', sans-serif;
   font-size: 12px;
   letter-spacing: px;
-  line-height: 22px;
   text-align: left; }
 
+.caption-vertical {
+  position: relative;
+  white-space: nowrap; }
+
 .caption-right {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
-  letter-spacing: px;
-  line-height: 22px;
   text-align: right; }
 
 .body-text {
@@ -137,6 +133,12 @@ body {
   letter-spacing: -0.5px;
   line-height: 22px;
   text-align: justify; }
+
+.credit {
+  font-size: 13px;
+  letter-spacing: -0.5px;
+  line-height: 22px;
+  text-align: left; }
 
 .imperfectionize:hover {
   cursor: pointer; }
