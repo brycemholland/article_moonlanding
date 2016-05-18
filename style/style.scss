@@ -57,14 +57,6 @@ $red: #F00000;
 $blue: #2828DD;
 $yellow: #FBC02D;
 
-#gagarin{
-  //transform: translate(-20%, 0);
-}
-
-#kennedy{
-  //transform: translate(-30%, 0);
-}
-
 body{
   background-color: #212121;
   color: $black;
@@ -87,16 +79,11 @@ iframe{
   background-color: $white;
 }
 
-.black{
-  background-color: $true_black;
-  color: $white;
-}
-
 .dark{
   background-color: #212121;
-  color: #fafafa;
+  color: $white;
   a, a:visited{
-    color: #fafafa;
+    color: $white;
   }
 }
 
@@ -116,7 +103,6 @@ iframe{
   background-position: 50% 57%;
   background-repeat: no-repeat;
   background-size: 100%;
-  //border-radius: 50%;
   bottom: -70vh;
   display: block;
   height: 100vh;

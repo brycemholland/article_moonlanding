@@ -50,15 +50,11 @@ iframe {
 .panel {
   background-color: whitesmoke; }
 
-.black {
-  background-color: black;
-  color: whitesmoke; }
-
 .dark {
   background-color: #212121;
-  color: #fafafa; }
+  color: whitesmoke; }
   .dark a, .dark a:visited {
-    color: #fafafa; }
+    color: whitesmoke; }
 
 .opening-title {
   color: whitesmoke;
