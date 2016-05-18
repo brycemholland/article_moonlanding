@@ -43,10 +43,6 @@ body {
   body a, body a:visited {
     color: #212121; }
 
-iframe {
-  min-height: 80vh;
-  width: 100%; }
-
 .panel {
   background-color: whitesmoke; }
 
@@ -104,11 +100,10 @@ iframe {
   text-align: left;
   transform: rotate(1deg); }
 
-.caption, .caption-right, .caption-vertical {
+.caption, .caption-right, .caption-vertical, .video-caption {
   color: #fbc02d;
   font-family: 'Montserrat', sans-serif;
   font-size: 12px;
-  letter-spacing: px;
   text-align: left; }
 
 .caption-vertical {
@@ -123,6 +118,18 @@ iframe {
   letter-spacing: -0.5px;
   line-height: 22px;
   text-align: justify; }
+
+.apollo-video {
+  height: 100%;
+  width: 100%; }
+
+.video-caption {
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  top: 5vh;
+  transform: translate(-50%, 0);
+  z-index: 10; }
 
 .credit {
   font-size: 13px;
