@@ -66,7 +66,17 @@ iframe {
   text-align: center;
   width: 100%; }
 
-.moon-illustration, .moon-illustration-red, .moon-illustration-blue {
+.headline-instructions {
+  color: #212121;
+  bottom: 5vh;
+  font-size: 15px;
+  font-weight: bold;
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  transform: translate(-50%, 0); }
+
+.moon-illustration {
   background-image: url("../images/moon2.png");
   background-position: 50% 57%;
   background-repeat: no-repeat;
@@ -78,22 +88,6 @@ iframe {
   position: absolute;
   transform: translate(-50%, 0%);
   width: 100vh; }
-  .moon-illustration .moon-overlay, .moon-illustration-red .moon-overlay, .moon-illustration-blue .moon-overlay {
-    background-color: #2828dd;
-    border-radius: 50%;
-    display: block;
-    height: 100%;
-    left: 0;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    width: 100%; }
-
-.moon-illustration-red {
-  left: 45%; }
-
-.moon-illustration-blue {
-  left: 55%; }
 
 .headline {
   color: #fbc02d;
