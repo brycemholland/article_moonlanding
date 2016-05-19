@@ -12,9 +12,15 @@ $(document).ready(function(){
 
   adjustColumns();
 
+  window.addEventListener("orientationchange", function() {
+    adjustColumns();
+  }, false);
+
+  /*
   $(window).resize(function(){
     adjustColumns();
   });
+  */
 
   function adjustColumns(){
     $panel.empty();
@@ -255,7 +261,6 @@ $(document).ready(function(){
         }
 
         if ($this_img.width() > $this_wrapper.width()){
-          console.log(($this_img.width()/2)-($this_wrapper.width()/2));
           $this_img.css('transform','translate('+(-(($this_img.width()/2)-($this_wrapper.width()/2)))+'px ,0)')
         }
       });
